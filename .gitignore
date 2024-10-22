@@ -10,4 +10,5 @@ __pycache__/
 .data/
 .vector_cache/
 .idea/
+.DS_Store
 venv
