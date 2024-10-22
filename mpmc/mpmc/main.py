@@ -69,7 +69,7 @@ def rmpmc(nsamples, dim,
     else:
         iterator = range(epochs)
     
-    #mpmc_points = []
+    mpmc_points = []
 
     for epoch in iterator:
         model.train()
@@ -92,10 +92,8 @@ def rmpmc(nsamples, dim,
             if min_discrepancy < best_loss:
                 best_loss = min_discrepancy
 
-                ## save MPMC points:
-                PATH = 'outputs/dim_'+str(dim)+'/nsamples_'+str(nsamples)+'.npy'
                 y = y.detach().cpu().numpy()
-                #mpmc_points.append(y)
+                mpmc_points.append(y)
 
             if (min_discrepancy > best_loss and (epoch + 1) >= start_reduce):
                 patience += 1
@@ -109,5 +107,4 @@ def rmpmc(nsamples, dim,
             if (lr < 1e-6):
                 break
 
-    #return np.asarray(mpmc_points)
-    return np.asarray(y)
+    return np.asarray(mpmc_points)    
