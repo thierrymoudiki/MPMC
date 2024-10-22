@@ -83,6 +83,14 @@ Further exploration in this area could yield valuable improvements.
 to add here, please reach out to me or open an issue,
 and I will be happy to add it to this list.
 
+# Install 
+
+```bash
+pip install git+https://github.com/thierrymoudiki/MPMC.git@main#subdirectory=mpmc
+```
+
+
+
 # Citation
 If you found our work useful in your research, please cite our paper at:
 ```bibtex
