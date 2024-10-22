@@ -69,7 +69,7 @@ def rmpmc(nsamples, dim,
     else:
         iterator = range(epochs)
     
-    mpmc_points = []
+    #mpmc_points = []
 
     for epoch in iterator:
         model.train()
@@ -87,13 +87,14 @@ def rmpmc(nsamples, dim,
                 batched_discrepancies = hickernell_all_emphasized(y.detach(),dim_emphasize)
             else:
                 NotImplementedError('Loss function not implemented')
-            min_discrepancy, mean_discrepancy = torch.min(batched_discrepancies).item(), torch.mean(batched_discrepancies).item
+            #min_discrepancy, mean_discrepancy = torch.min(batched_discrepancies).item(), torch.mean(batched_discrepancies).item
+            min_discrepancy = torch.min(batched_discrepancies).item()
 
             if min_discrepancy < best_loss:
                 best_loss = min_discrepancy
 
                 y = y.detach().cpu().numpy()
-                mpmc_points.append(y)
+                #mpmc_points.append(y)
 
             if (min_discrepancy > best_loss and (epoch + 1) >= start_reduce):
                 patience += 1
@@ -107,4 +108,5 @@ def rmpmc(nsamples, dim,
             if (lr < 1e-6):
                 break
 
-    return np.asarray(mpmc_points)    
+    #return np.asarray(mpmc_points)    
+    return y 

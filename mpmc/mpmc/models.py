@@ -42,7 +42,11 @@ class MPNN_layer(MessagePassing):
 
 
 class MPMC_net(nn.Module):
-    def __init__(self, dim, nhid, nlayers, nsamples, nbatch, radius, loss_fn, dim_emphasize, n_projections):
+    def __init__(self, dim, nhid, 
+                 nlayers, nsamples, 
+                 nbatch, radius, 
+                 loss_fn, dim_emphasize, 
+                 n_projections):
         super(MPMC_net, self).__init__()
         self.enc = nn.Linear(dim,nhid)
         self.convs = nn.ModuleList()
