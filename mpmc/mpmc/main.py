@@ -25,30 +25,22 @@ def rmpmc(nsamples, dim,
             **kwargs: additional arguments
         
     """    
-
-    if 'epochs' not in kwargs: 
-        epochs = 200000
     
-    if 'loss_fn' not in kwargs:
-        loss_fn = 'L2'
+    epochs = kwargs.get('epochs', 200000)
     
-    if 'n_hid' not in kwargs:
-        n_hid = 128
+    loss_fn = kwargs.get('loss_fn', 'L2')
     
-    if 'n_layers' not in kwargs:
-        n_layers = 2
+    n_hid = kwargs.get('n_hid', 128)
     
-    if 'n_batch' not in kwargs:
-        n_batch = 16
+    n_layers = kwargs.get('n_layers', 2)
     
-    if 'radius' not in kwargs:
-        radius = 0.35
-
-    if 'dim_emphasize' not in kwargs:
-        dim_emphasize = [1]
+    n_batch = kwargs.get('n_batch', 16)
     
-    if 'n_projections' not in kwargs:
-        n_projections = 15
+    radius = kwargs.get('radius', 0.35)
+    
+    dim_emphasize = kwargs.get('dim_emphasize', [1])
+    
+    n_projections = kwargs.get('n_projections', 15)
 
     model = MPMC_net(dim=dim, nsamples=nsamples, 
                      nhid=n_hid, nlayers=n_layers, 
