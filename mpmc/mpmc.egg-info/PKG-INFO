@@ -1,0 +1,20 @@
+Metadata-Version: 2.1
+Name: mpmc
+Version: 0.1.0
+Summary: Message-passing Monte Carlo
+Home-page: 
+Download-URL: 
+Author: T. Moudiki
+Author-email: thierry.moudiki@gmail.com
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: Cython
+Requires-Dist: numpy
+Requires-Dist: torch==2.3.0
+Requires-Dist: torch-cluster
+Requires-Dist: torch-geometric
+Requires-Dist: tqdm
+
+Message-passing Monte Carlo for quasi-random numbers generation

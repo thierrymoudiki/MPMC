@@ -56,7 +56,7 @@ def rmpmc(nsamples, dim,
                      loss_fn=loss_fn, dim_emphasize=dim_emphasize, 
                      n_projections=n_projections).to(device)
 
-    if (lr in kwargs) and (weight_decay in kwargs):
+    if ('lr' in kwargs) and ('weight_decay' in kwargs):
         optimizer = optim.Adam(model.parameters(), 
                                lr=lr, weight_decay=weight_decay)
     else: 
