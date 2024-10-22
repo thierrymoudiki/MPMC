@@ -60,8 +60,10 @@ def rmpmc(nsamples, dim,
         optimizer = optim.Adam(model.parameters(), 
                                lr=lr, weight_decay=weight_decay)
     else: 
+        lr = 0.001
+        weight_decay=1e-6
         optimizer = optim.Adam(model.parameters(), 
-                               lr=0.001, weight_decay=1e-6)
+                               lr=lr, weight_decay=weight_decay)
 
     best_loss = 10000.
     patience = 0
