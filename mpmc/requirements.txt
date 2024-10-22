@@ -1,6 +1,6 @@
 Cython
 numpy
 torch==2.4.1
-torch-cluster==2.4.1
-torch-geometric==2.4.1
+torch-cluster
+torch-geometric
 tqdm
