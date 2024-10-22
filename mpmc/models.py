@@ -1,9 +1,9 @@
 import torch
 import math
 from torch import nn
-from torch_cluster import radius_graph
+#from torch_cluster import radius_graph
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-from torch_geometric.nn import MessagePassing, InstanceNorm
+from torch_geometric.nn import MessagePassing, InstanceNorm, radius_graph
 
 class MPNN_layer(MessagePassing):
     def __init__(self, ninp, nhid):

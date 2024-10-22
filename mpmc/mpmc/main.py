@@ -2,17 +2,14 @@
 import torch
 import torch.optim as optim
 import numpy as np
-import argparse
-from models import MPMC_net
-from pathlib import Path
 from tqdm import tqdm
-from utils import L2discrepancy, hickernell_all_emphasized
+from .utils import L2discrepancy, hickernell_all_emphasized
+from .models import MPMC_net
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 def rmpmc(nsamples, dim, 
           show_progress=True,
-          verbose=False,
           **kwargs):
     """
         Train MPMC model with given number of samples and dimensionality.
@@ -23,11 +20,41 @@ def rmpmc(nsamples, dim,
 
             dim: dimensionality
 
+            show_progress: whether to show progress bar or not
+
             **kwargs: additional arguments
         
     """    
 
-    model = MPMC_net(dim=dim, nsamples=nsamples, **kwargs).to(device)
+    if 'epochs' not in kwargs: 
+        epochs = 200000
+    
+    if 'loss_fn' not in kwargs:
+        loss_fn = 'L2'
+    
+    if 'n_hid' not in kwargs:
+        n_hid = 128
+    
+    if 'n_layers' not in kwargs:
+        n_layers = 2
+    
+    if 'n_batch' not in kwargs:
+        n_batch = 16
+    
+    if 'radius' not in kwargs:
+        radius = 0.35
+
+    if 'dim_emphasize' not in kwargs:
+        dim_emphasize = [1]
+    
+    if 'n_projections' not in kwargs:
+        n_projections = 15
+
+    model = MPMC_net(dim=dim, nsamples=nsamples, 
+                     nhid=n_hid, nlayers=n_layers, 
+                     nbatch=n_batch, radius=radius, 
+                     loss_fn=loss_fn, dim_emphasize=dim_emphasize, 
+                     n_projections=n_projections).to(device)
 
     if (lr in kwargs) and (weight_decay in kwargs):
         optimizer = optim.Adam(model.parameters(), 
@@ -43,12 +70,6 @@ def rmpmc(nsamples, dim,
     start_reduce = 100000
     reduce_point = 10
 
-    if epochs not in kwargs: 
-        epochs = 200000
-    
-    if loss_fn not in kwargs:
-        loss_fn = 'L2'
-    
     if show_progress:
         iterator = tqdm(range(epochs))
     else:
